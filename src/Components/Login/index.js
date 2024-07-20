@@ -12,7 +12,6 @@ const StyledLoginDiv = styled.div`
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #065535;
 
     .login-form-section {
         width: 500px;

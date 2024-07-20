@@ -5,18 +5,21 @@ import PropTypes from "prop-types";
 
 
 function Icon({ name, handleClick, ...rest }) {
+  console.log("rest", rest)
   const IconComponent = Icons[name];
 
   const StyledCustomComponent = styled(IconComponent)`
-    color:white;
+    color:black;
     width:20px;
     height:20px;
     padding: 8px;
     border-radius: 50%;
     background:${rest["background"] || rest["backgroundColor"]};
+    cursor:${rest?.cursor};
 
    &&:hover{
     background: #282653;
+    color:${rest?.hoverIconColor};
    }
 `;
 

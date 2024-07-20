@@ -15,24 +15,19 @@ export const uploadMedia = async (file) => {
     const formData = new FormData();
     formData.append("file", file);
 
-    const response = await axios.post(
+    return await axios.post(
         "https://crafto.app/crafto/v1.0/media/assignment/upload",
         formData,
         {
             headers: { "Content-Type": "multipart/form-data" },
         }
     );
-    return response.data;
 };
 
-export const createQuote = async (token, text, mediaUrl) => {
-    const response = await axiosInstance.post(
-        "/postQuote",
-        { text, mediaUrl },
-        {
-            headers: { Authorization: token },
-        }
-    );
+export const createQuote = async (token, payload) => {
+    const response = await axiosInstance.post("/postQuote", payload, {
+        headers: { Authorization: token },
+    });
     return response.data;
 };
 

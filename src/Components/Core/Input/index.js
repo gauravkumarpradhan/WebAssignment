@@ -23,9 +23,17 @@ const StyledInput = styled.input`
     }
 `;
 
-function Input({ label, type, placeholder, name, value, handleChange }) {
+function Input({
+    label,
+    type,
+    placeholder,
+    name,
+    value,
+    handleChange,
+    classes,
+}) {
     return (
-        <div className="flex-col gap-4">
+        <div className={`flex-col gap-4 ${classes}`}>
             <Text size={4}>{label}</Text>
             <StyledInput
                 type={type}

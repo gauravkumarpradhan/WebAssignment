@@ -32,6 +32,7 @@ const Button = styled.button`
     &:active {
         transform: ${(props) => !props.disabled && "scale(1.02)"};
     }
+    margin-top: ${(props) => props?.marginTop}px;
 `;
 
 export default Button;
