@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import FlexItem from "../Core/Flex/FlexItem";
 
 const fontWeights = {
     extraLight: 200,
@@ -13,7 +12,7 @@ const fontWeights = {
 };
 
 function Text({ size, weight, children, variant, rest }) {
-    const StyledText = styled(FlexItem)`
+    const StyledText = styled.div`
         font-weight: ${fontWeights?.[weight]};
         font-size: ${size * 4}px;
         color: ${variant};

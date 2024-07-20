@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import Flex from "../Flex/Flex";
 import StyledOtpInput from "./StyledOtpInput";
 import Text from "../../Text";
 
@@ -39,10 +38,10 @@ export default function OtpInputWithValidation({
     }, [JSON.stringify(otp)]);
 
     return (
-        <Flex gap={4} direction="column">
+        <div className="flex-col gap-4">
             <Text size={4}>One Time Password (OTP)</Text>
 
-            <Flex gap={4} direction="row">
+            <div className="flex flex-row gap-4">
                 {[...new Array(4)].map((digit, index) => (
                     <StyledOtpInput
                         key={index}
@@ -55,7 +54,7 @@ export default function OtpInputWithValidation({
                         }
                     />
                 ))}
-            </Flex>
-        </Flex>
+            </div>
+        </div>
     );
 }
