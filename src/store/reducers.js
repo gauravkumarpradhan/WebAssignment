@@ -18,7 +18,9 @@ const appSlice = createSlice({
 export const dispatchLogin = createAsyncThunk(
     "app/login",
     async (payload, { dispatch }) => {
+        console.log("The payload is ", payload);
         const response = await login(payload);
+
         if (response) {
             dispatch(setUserToken(response));
         }

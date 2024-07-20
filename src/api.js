@@ -8,8 +8,7 @@ const axiosInstance = axios.create({
 });
 
 export const login = async (payload) => {
-    const response = await axiosInstance.post("/login", payload);
-    return await response.data;
+    return await axiosInstance.post("/login", payload);
 };
 
 export const uploadMedia = async (file) => {

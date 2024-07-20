@@ -1,78 +1,79 @@
 import React, { useState } from "react";
-import Flex from "../Core/Flex/Flex";
 import OtpInputWithValidation from "../Core/OtpGenerator";
-import CardWrapper from "../Core/CardWrapper";
 import Text from "../Text";
 import Input from "../Core/Input";
 import Button from "../Core/Button";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { dispatchLogin } from "../../store/reducers";
+import styled from "styled-components";
+
+const StyledLoginDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #065535;
+
+    .login-form-section {
+        width: 500px;
+        background: #181921;
+        margin: auto;
+        padding: 30px;
+    }
+`;
 
 function Login() {
     const dispatch = useDispatch();
     const [loginFormValues, setLoginFormValues] = useState({
-        username: null,
-        otp: null,
+        username: "",
+        otp: "",
     });
 
-    function handleSubmit() {
+    function handleSubmit(event) {
+        event.preventDefault();
         dispatch(dispatchLogin(loginFormValues));
     }
 
     function handleFormFieldChange(event) {
-        event.preventDefault();
         setLoginFormValues({
             ...loginFormValues,
-            [event.target.name]: event.target.value,
+            [event.target.name]: event.target.value?.toString(),
         });
     }
 
-    console.log("Form Values ", loginFormValues);
-
     return (
-        <Flex
-            justify="center"
-            align="center"
-            height="100vh"
-            background="#065535"
-        >
-            <CardWrapper
-                stylesObject={{
-                    width: "500px",
-                    background: "#181921",
-                    margin: "auto",
-                    padding: "30px",
-                }}
-            >
-                <Flex direction="column" gap={8}>
+        <StyledLoginDiv>
+            <div className="card-wrapper login-form-section">
+                <div className="flex-col gap-3">
                     <Text size={9} variant={"white"}>
                         Crafto
                     </Text>
 
                     <form onSubmit={handleSubmit}>
-                        <Flex direction="column" gap={8}>
+                        <div className="flex flex-col gap-6">
                             <Input
                                 type="text"
                                 placeholder="Username"
                                 name="username"
                                 label="Username"
-                                value={loginFormValues?.username}
                                 handleChange={handleFormFieldChange}
                             />
 
                             <OtpInputWithValidation
                                 numberOfDigits={4}
                                 handleChange={handleFormFieldChange}
+                                name="otp"
+                                value={loginFormValues?.otp}
                             />
 
                             <Button variant="primary" type="submit">
                                 Log in
                             </Button>
-                        </Flex>
+                        </div>
                     </form>
-                </Flex>
-            </CardWrapper>
-        </Flex>
+                </div>
+            </div>
+        </StyledLoginDiv>
     );
 }
 

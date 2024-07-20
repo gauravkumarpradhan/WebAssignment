@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Flex from "../Flex/Flex";
 import Text from "../../Text";
 
 const StyledInput = styled.input`
@@ -12,6 +11,7 @@ const StyledInput = styled.input`
     color: #fff;
     font-size: 1rem;
     box-sizing: border-box;
+    gap: 16px;
 
     &::placeholder {
         color: #888;
@@ -25,7 +25,7 @@ const StyledInput = styled.input`
 
 function Input({ label, type, placeholder, name, value, handleChange }) {
     return (
-        <Flex direction="column" gap={4}>
+        <div className="flex-col gap-4">
             <Text size={4}>{label}</Text>
             <StyledInput
                 type={type}
@@ -34,7 +34,7 @@ function Input({ label, type, placeholder, name, value, handleChange }) {
                 onChange={handleChange}
                 value={value}
             />
-        </Flex>
+        </div>
     );
 }
 

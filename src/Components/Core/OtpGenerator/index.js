@@ -3,8 +3,12 @@ import Flex from "../Flex/Flex";
 import StyledOtpInput from "./StyledOtpInput";
 import Text from "../../Text";
 
-export default function OtpInputWithValidation({ numberOfDigits }) {
-    const [otp, setOtp] = useState(new Array(numberOfDigits).fill(""));
+export default function OtpInputWithValidation({
+    numberOfDigits,
+    name,
+    handleChange: onOtpInputChange,
+}) {
+    const [otp, setOtp] = useState([]);
     const otpBoxReference = useRef([]);
 
     function handleChange(value, index) {
@@ -26,21 +30,23 @@ export default function OtpInputWithValidation({ numberOfDigits }) {
         }
     }
 
-    // useEffect(() => {
-    //     if (otp) {
-    //         handleChange({ name, value: Number(otp?.join("")) });
-    //     }
-    // }, [otp]);
+    useEffect(() => {
+        if (otp?.length > 0) {
+            onOtpInputChange({
+                target: { name, value: Number(otp?.join("")) },
+            });
+        }
+    }, [JSON.stringify(otp)]);
 
     return (
         <Flex gap={4} direction="column">
             <Text size={4}>One Time Password (OTP)</Text>
 
             <Flex gap={4} direction="row">
-                {otp.map((digit, index) => (
+                {[...new Array(4)].map((digit, index) => (
                     <StyledOtpInput
                         key={index}
-                        value={digit}
+                        value={otp?.[index]}
                         maxLength={1}
                         onChange={(e) => handleChange(e.target.value, index)}
                         onKeyUp={(e) => handleBackspaceAndEnter(e, index)}
