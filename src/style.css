@@ -1,0 +1,10 @@
+:root {
+    height: 100%;
+    overflow-y: hidden;
+    font-family: "Nunito Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}

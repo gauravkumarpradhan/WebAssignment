@@ -1,12 +1,13 @@
 import React from "react";
-import Flex from "./Components/Core/Flex/Flex";
+import RoutesSection from "./routes";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
-  return (
-    <Flex width="100%" height="100%" >
-      Initial Setup
-    </Flex>
-  );
+    return (
+        <BrowserRouter>
+            <RoutesSection />
+        </BrowserRouter>
+    );
 }
 
 export default App;
