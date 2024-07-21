@@ -19,30 +19,47 @@ const QuoteListWrapper = styled.div`
 
 const Table = styled.table`
     width: 100%;
-    border-collapse: separate; /* Use separate borders to enable spacing */
-    border-spacing: 0 10px; /* Add vertical spacing between rows */
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    background-image: linear-gradient(45deg, #874da2 0%, #c43a30 100%);
+    padding: 0px 12px;
+    border-radius: 16px;
+
+    @media (max-width: 672px) {
+        width: 1200px;
+        overflow-x: scroll;
+        margin-top: 40px;
+    }
 `;
 
 const Th = styled.th`
     text-align: left;
     padding: 8px;
     background-color: #f2f2f2;
+    font-size: 12px;
+    font-weight: 600;
 `;
 
 const Td = styled.td`
     padding: 8px;
     border-bottom: 1px solid #ddd;
+    font-size: 12px;
+    font-weight: 500;
 `;
 
 const Media = styled.img`
     width: 100px;
     height: 100px;
     object-fit: cover;
+    font-size: 12px;
+    font-weight: 500;
 `;
 
 const Text = styled.p`
     font-size: 16px;
     margin: 0;
+    font-size: 12px;
+    font-weight: 500;
 `;
 
 const QuoteListingSection = () => {
@@ -77,7 +94,7 @@ const QuoteListingSection = () => {
     }
 
     return (
-        <div style={{ overflow: "hidden" }}>
+        <div>
             <QuoteListWrapper>
                 <CreateNewQuote />
 

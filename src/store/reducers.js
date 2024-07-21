@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { createQuote, getQuotes, login, uploadMedia } from "../api";
+import { toast } from "react-toastify";
 
 const initialState = {
     token: null,
@@ -33,6 +34,7 @@ export const dispatchLogin = createAsyncThunk(
         if (response?.data) {
             if (onSuccess) {
                 onSuccess();
+                toast.success("Login Successfull");
             }
             dispatch(setUserToken(response?.data?.token));
         }
@@ -46,6 +48,7 @@ export const fetchMediaUrl = createAsyncThunk(
 
         if (response?.data) {
             if (onSuccess) {
+                toast.success("Media url successfully fetched");
                 onSuccess(response?.data);
             }
         }
@@ -58,6 +61,7 @@ export const dispatchCreateNewQuote = createAsyncThunk(
         const response = await createQuote(token, payload);
 
         if (response?.data) {
+            toast.success("Quote creation successful");
             if (onSuccess) {
                 onSuccess();
             }

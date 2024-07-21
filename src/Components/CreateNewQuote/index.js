@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "../Core/Button";
 import Modal from "../Core/Modal";
@@ -10,17 +10,43 @@ import { useDispatch, useSelector } from "react-redux";
 import { dispatchCreateNewQuote, fetchMediaUrl } from "../../store/reducers";
 import { userTokenSelector } from "../../store/selectors";
 
+const CardWrapper = styled.div`
+    width: 500px;
+    background: #ada8d3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+    @media (max-width: 566px) {
+        width: 300px;
+    }
+
+    @media (max-width: 400px) {
+        width: 250px;
+    }
+`;
+
 const StyledButton = styled(Button)`
     background-color: #4caf50; /* Green background */
     color: white;
     position: fixed; /* Fixed position */
     bottom: 20px; /* Distance from the bottom of the viewport */
-    right: 20px; /* Distance from the right of the viewport */
+    right: 35px; /* Distance from the right of the viewport */
     z-index: 1000; /* Ensure it appears above other content */
     display: ${(props) => (!props?.show ? "none" : "")};
 
     &:hover {
         background-color: #45a049; /* Darker green on hover */
+    }
+
+    @media (max-width: 672px) {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        height: min-content;
     }
 `;
 
@@ -35,25 +61,6 @@ function CreateNewQuote() {
     function toggleCreateNewQuoteModal() {
         setOpen(!open);
     }
-
-    const CardWrapper = styled.div`
-        width: 500px;
-        background: #ada8d3;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-
-        @media (max-width: 566px) {
-            width: 300px;
-        }
-
-        @media (max-width: 400px) {
-            width: 250px;
-        }
-    `;
 
     function handleFileUploadChange(event) {
         dispatch(
@@ -137,8 +144,16 @@ function CreateNewQuote() {
 
                             <Input
                                 type="text"
+                                name="text"
                                 label="Quote Text"
                                 classes="w-full"
+                                placeholder="Write Quote...."
+                                handleChange={(event) => {
+                                    setCreateNewQuote({
+                                        ...createNewQuote,
+                                        [event.target.name]: event.target.value,
+                                    });
+                                }}
                             />
                         </div>
 
@@ -146,6 +161,12 @@ function CreateNewQuote() {
                             variant="primary"
                             marginTop="30"
                             onClick={handleCreateNewQuoteButton}
+                            disabled={
+                                !(
+                                    createNewQuote.text &&
+                                    createNewQuote.mediaUrl
+                                )
+                            }
                         >
                             Create New Quote
                         </Button>
