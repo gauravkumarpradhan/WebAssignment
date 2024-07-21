@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# You can watch the website live at the following url : <a href="https://669d0a2e12f07fe939b35ba6--charming-kashata-be49f6.netlify.app" target="_blank">Live Website Running in Netlify</a>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
