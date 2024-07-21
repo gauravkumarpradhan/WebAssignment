@@ -45,6 +45,14 @@ function CreateNewQuote() {
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+        @media (max-width: 566px) {
+            width: 300px;
+        }
+
+        @media (max-width: 400px) {
+            width: 250px;
+        }
     `;
 
     function handleFileUploadChange(event) {
