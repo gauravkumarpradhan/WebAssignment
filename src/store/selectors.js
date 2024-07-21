@@ -9,5 +9,10 @@ export const userTokenSelector = createSelector(
 
 export const quoteListSelector = createSelector(
     selectAppStore,
-    (appStore) => appStore?.quotesList
+    (appStore) => appStore?.quotes?.list
+);
+
+export const isFetchingQuotesListSelector = createSelector(
+    selectAppStore,
+    (appStore) => appStore?.quotes?.isFetching
 );

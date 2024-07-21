@@ -1,9 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CreateNewQuote from "../CreateNewQuote";
 import { useDispatch, useSelector } from "react-redux";
-import { quoteListSelector, userTokenSelector } from "../../store/selectors";
+import {
+    isFetchingQuotesListSelector,
+    quoteListSelector,
+    userTokenSelector,
+} from "../../store/selectors";
 import { fetchQuotesList } from "../../store/reducers";
 import styled from "styled-components";
+import StepPagination from "../StepPagination";
 
 const QuoteListWrapper = styled.div`
     display: flex;
@@ -31,7 +36,7 @@ const Td = styled.td`
 
 const Media = styled.img`
     width: 100px;
-    height: auto;
+    height: 100px;
     object-fit: cover;
 `;
 
@@ -44,10 +49,32 @@ const QuoteListingSection = () => {
     const dispatch = useDispatch();
     const token = useSelector(userTokenSelector);
     const quoteList = useSelector(quoteListSelector);
+    const [hasMore, setHasMore] = useState(true);
+    const [offset, setOffset] = useState(1);
+    const isFetchingQuotesList = useSelector(isFetchingQuotesListSelector);
 
     useEffect(() => {
-        dispatch(fetchQuotesList({ token, limit: 5, offset: 1 }));
-    }, [token]);
+        if (token) {
+            dispatch(
+                fetchQuotesList({
+                    token,
+                    limit: 5,
+                    offset,
+                    onSuccess: handleFetchQuotesListSuccess,
+                })
+            );
+        }
+    }, [token, offset]);
+
+    function handleLoadMore() {
+        setOffset(offset + 1);
+    }
+
+    function handleFetchQuotesListSuccess(nextList) {
+        if (nextList?.length === 0) {
+            setHasMore(false);
+        }
+    }
 
     return (
         <div style={{ overflow: "hidden" }}>
@@ -100,6 +127,12 @@ const QuoteListingSection = () => {
                     </tbody>
                 </Table>
             </QuoteListWrapper>
+
+            <StepPagination
+                hasMore={hasMore}
+                onLoadMore={handleLoadMore}
+                isFetching={isFetchingQuotesList}
+            />
         </div>
     );
 };

@@ -9,16 +9,18 @@ function Icon({ name, handleClick, ...rest }) {
   const IconComponent = Icons[name];
 
   const StyledCustomComponent = styled(IconComponent)`
-    color:black;
+    color:${rest?.color ? rest?.color : "black"};
     width:20px;
     height:20px;
     padding: 8px;
     border-radius: 50%;
     background:${rest["background"] || rest["backgroundColor"]};
     cursor:${rest?.cursor};
+    margin: ${rest?.margin};
+    padding: ${rest?.padding};
 
    &&:hover{
-    background: #282653;
+    background:${rest?.hoverBackgroundColor ? rest?.hoverBackgroundColor : "#282653"} ;
     color:${rest?.hoverIconColor};
    }
 `;

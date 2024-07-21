@@ -16,7 +16,6 @@ const Button = styled.button`
     border-radius: 0.375rem;
     font-size: 1rem;
     cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-    opacity: ${(props) => (props.disabled ? "0.65" : "1")};
     transition: background-color 0.3s ease, transform 0.2s ease;
 
     &:hover {

@@ -3,7 +3,10 @@ import { createQuote, getQuotes, login, uploadMedia } from "../api";
 
 const initialState = {
     token: null,
-    quotesList: [],
+    quotes: {
+        list: [],
+        isFetching: false,
+    },
 };
 
 const appSlice = createSlice({
@@ -14,7 +17,10 @@ const appSlice = createSlice({
             state.token = action.payload;
         },
         setQuotesList(state, action) {
-            state.quotesList = action.payload;
+            state.quotes.list = [...state.quotes.list, ...action.payload];
+        },
+        setIsFetchingQuotesList(state, action) {
+            state.quotes.isFetching = action.payload;
         },
     },
 });
@@ -55,7 +61,6 @@ export const dispatchCreateNewQuote = createAsyncThunk(
             if (onSuccess) {
                 onSuccess();
             }
-            console.log("File created");
         }
     }
 );
@@ -63,14 +68,17 @@ export const dispatchCreateNewQuote = createAsyncThunk(
 export const fetchQuotesList = createAsyncThunk(
     "app/fetchQuotesList",
     async ({ token, limit, offset }, { dispatch }) => {
+        dispatch(setIsFetchingQuotesList(true));
         const response = await getQuotes(token, limit, offset);
 
         if (response?.data) {
             dispatch(setQuotesList(response?.data));
         }
+        dispatch(setIsFetchingQuotesList(false));
     }
 );
 
-export const { setUserToken, setQuotesList } = appSlice.actions;
+export const { setUserToken, setQuotesList, setIsFetchingQuotesList } =
+    appSlice.actions;
 
 export default appSlice.reducer;
