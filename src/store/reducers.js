@@ -21,10 +21,13 @@ const appSlice = createSlice({
 
 export const dispatchLogin = createAsyncThunk(
     "app/login",
-    async (payload, { dispatch }) => {
+    async ({ payload, onSuccess }, { dispatch }) => {
         const response = await login(payload);
 
         if (response?.data) {
+            if (onSuccess) {
+                onSuccess();
+            }
             dispatch(setUserToken(response?.data?.token));
         }
     }

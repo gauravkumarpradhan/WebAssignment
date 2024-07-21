@@ -10,7 +10,6 @@ const QuoteListWrapper = styled.div`
     flex-direction: column;
     gap: 20px;
     padding: 20px;
-    overflow-y: scroll;
 `;
 
 const Table = styled.table`
@@ -41,11 +40,6 @@ const Text = styled.p`
     margin: 0;
 `;
 
-const DateText = styled.div`
-    font-size: 14px;
-    color: #666;
-`;
-
 const QuoteListingSection = () => {
     const dispatch = useDispatch();
     const token = useSelector(userTokenSelector);
@@ -56,7 +50,7 @@ const QuoteListingSection = () => {
     }, [token]);
 
     return (
-        <div>
+        <div style={{ overflow: "hidden" }}>
             <QuoteListWrapper>
                 <CreateNewQuote />
 

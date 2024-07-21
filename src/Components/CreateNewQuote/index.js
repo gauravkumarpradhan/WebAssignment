@@ -13,6 +13,11 @@ import { userTokenSelector } from "../../store/selectors";
 const StyledButton = styled(Button)`
     background-color: #4caf50; /* Green background */
     color: white;
+    position: fixed; /* Fixed position */
+    bottom: 20px; /* Distance from the bottom of the viewport */
+    right: 20px; /* Distance from the right of the viewport */
+    z-index: 1000; /* Ensure it appears above other content */
+    display: ${(props) => (!props?.show ? "none" : "")};
 
     &:hover {
         background-color: #45a049; /* Darker green on hover */
@@ -78,7 +83,11 @@ function CreateNewQuote() {
 
     return (
         <div>
-            <StyledButton variant="primary" onClick={toggleCreateNewQuoteModal}>
+            <StyledButton
+                variant="primary"
+                onClick={toggleCreateNewQuoteModal}
+                show={!open}
+            >
                 Create New Quote
             </StyledButton>
 

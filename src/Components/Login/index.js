@@ -22,6 +22,7 @@ const StyledLoginDiv = styled.div`
 `;
 
 function Login() {
+    const [loginButtonDisabled, setLoginButtonDisabled] = useState(false);
     const dispatch = useDispatch();
     const [loginFormValues, setLoginFormValues] = useState({
         username: "",
@@ -30,7 +31,15 @@ function Login() {
 
     function handleSubmit(event) {
         event.preventDefault();
-        dispatch(dispatchLogin(loginFormValues));
+        setLoginButtonDisabled(true);
+        dispatch(
+            dispatchLogin({
+                payload: loginFormValues,
+                onSuccess: () => {
+                    setLoginButtonDisabled(false);
+                },
+            })
+        );
     }
 
     function handleFormFieldChange(event) {
@@ -65,7 +74,11 @@ function Login() {
                                 value={loginFormValues?.otp}
                             />
 
-                            <Button variant="primary" type="submit">
+                            <Button
+                                variant="primary"
+                                type="submit"
+                                disabled={loginButtonDisabled}
+                            >
                                 Log in
                             </Button>
                         </div>
