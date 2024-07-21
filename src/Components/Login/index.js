@@ -19,6 +19,28 @@ const StyledLoginDiv = styled.div`
         margin: auto;
         padding: 30px;
     }
+
+    @media (max-width: 566px) {
+        .login-form-section {
+            width: 300px;
+        }
+
+        .otp-input {
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    @media (max-width: 400px) {
+        .login-form-section {
+            width: 250px;
+        }
+
+        .otp-input {
+            width: 16px;
+            height: 16px;
+        }
+    }
 `;
 
 function Login() {

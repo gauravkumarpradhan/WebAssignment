@@ -44,6 +44,7 @@ export default function OtpInputWithValidation({
             <div className="flex flex-row gap-4">
                 {[...new Array(4)].map((digit, index) => (
                     <StyledOtpInput
+                        className="otp-input"
                         key={index}
                         value={otp?.[index]}
                         maxLength={1}
