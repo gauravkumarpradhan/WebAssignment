@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 
 
 function Icon({ name, handleClick, ...rest }) {
-  console.log("rest", rest)
   const IconComponent = Icons[name];
 
   const StyledCustomComponent = styled(IconComponent)`

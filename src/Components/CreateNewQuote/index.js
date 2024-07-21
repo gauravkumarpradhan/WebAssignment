@@ -30,23 +30,14 @@ const CardWrapper = styled.div`
 `;
 
 const StyledButton = styled(Button)`
-    background-color: #4caf50; /* Green background */
+    background-color: brown; /* Green background */
     color: white;
-    position: fixed; /* Fixed position */
-    bottom: 20px; /* Distance from the bottom of the viewport */
-    right: 35px; /* Distance from the right of the viewport */
     z-index: 1000; /* Ensure it appears above other content */
     display: ${(props) => (!props?.show ? "none" : "")};
+    margin-right: 60px;
 
     &:hover {
-        background-color: #45a049; /* Darker green on hover */
-    }
-
-    @media (max-width: 672px) {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        height: min-content;
+        background-color: #8b6c5c; /* Darker green on hover */
     }
 `;
 
@@ -158,7 +149,7 @@ function CreateNewQuote() {
                         </div>
 
                         <Button
-                            variant="primary"
+                            variant="secondary"
                             marginTop="30"
                             onClick={handleCreateNewQuoteButton}
                             disabled={

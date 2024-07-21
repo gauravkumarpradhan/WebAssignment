@@ -15,6 +15,7 @@ const QuoteListWrapper = styled.div`
     flex-direction: column;
     gap: 20px;
     padding: 20px;
+    margin-top: 50px;
 `;
 
 const Table = styled.table`
@@ -24,6 +25,7 @@ const Table = styled.table`
     background-image: linear-gradient(45deg, #874da2 0%, #c43a30 100%);
     padding: 0px 12px;
     border-radius: 16px;
+    margin-top: 30px;
 
     @media (max-width: 672px) {
         width: 1200px;
@@ -32,12 +34,27 @@ const Table = styled.table`
     }
 `;
 
+const TableBody = styled.tbody`
+    display: block;
+    height: 450px; /* Adjust this height as needed */
+    overflow: auto;
+`;
+
+const TableRow = styled.tr`
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+`;
+
 const Th = styled.th`
     text-align: left;
     padding: 8px;
     background-color: #f2f2f2;
     font-size: 12px;
     font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 1; /* Ensure it stays above other content */
 `;
 
 const Td = styled.td`
@@ -60,6 +77,27 @@ const Text = styled.p`
     margin: 0;
     font-size: 12px;
     font-weight: 500;
+`;
+
+const HeaderContainer = styled.header`
+    width: 100%;
+    padding: 1rem 2rem;
+    background-color: #4caf50; /* Background color */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+`;
+
+const Logo = styled.div`
+    font-size: 32px;
+    font-weight: bold;
+    color: black;
+    font-style: italic;
 `;
 
 const QuoteListingSection = () => {
@@ -95,22 +133,26 @@ const QuoteListingSection = () => {
 
     return (
         <div>
-            <QuoteListWrapper>
-                <CreateNewQuote />
+            <HeaderContainer>
+                <Logo>Crafto</Logo>
 
+                <CreateNewQuote />
+            </HeaderContainer>
+
+            <QuoteListWrapper>
                 <Table>
                     <thead>
-                        <tr>
+                        <TableRow>
                             <Th>Image Uploaded</Th>
                             <Th>Username</Th>
                             <Th>Date</Th>
                             <Th>Created At</Th>
                             <Th>Updated At</Th>
-                        </tr>
+                        </TableRow>
                     </thead>
-                    <tbody>
+                    <TableBody>
                         {quoteList.map((quote) => (
-                            <tr
+                            <TableRow
                                 key={quote.id}
                                 style={{
                                     background:
@@ -139,9 +181,9 @@ const QuoteListingSection = () => {
                                 <Td>
                                     <Text>{quote.updatedAt}</Text>
                                 </Td>
-                            </tr>
+                            </TableRow>
                         ))}
-                    </tbody>
+                    </TableBody>
                 </Table>
             </QuoteListWrapper>
 
